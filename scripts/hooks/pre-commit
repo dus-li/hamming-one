@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: Dus'li
+
+set -euo pipefail
+
+FAILED=0
+SOURCES=$(git diff --cached --name-only | grep -E '\.(cxx|cu|hxx|cuh|tpp)' || true)
+
+for file in $(git diff --cached --name-only); do
+	if [ ! -e "${file}" ]; then
+		continue
+	fi
+
+	reuse lint-file "${file}" || FAILED=1
+done
+
+if [ "${FAILED}" == "1" ]; then
+	echo
+	echo "Please address the licensing issues"
+	exit 1
+fi
+
+for file in ${SOURCES}; do
+	# File was removed
+	if [ ! -e "${file}" ]; then
+		continue
+	fi
+
+	clang-format --style=file --dry-run -Werror "${file}" &>/dev/null \
+		&& continue
+
+	pattern="/tmp/$(basename ${file}).bak.XXXX"
+	tmpfile=$(mktemp "${pattern}")
+
+	cp "${file}" "${tmpfile}"
+	clang-format --style=file -i "${file}"
+
+	printf "\033[31mERROR\033[0m File %s violates format style\n" "${file}"
+	echo "      Backup saved as: ${tmpfile}"
+	FAILED=1
+done
+
+if [ "${FAILED}" == 1 ]; then
+	echo
+	echo "Please re-add mentioned files"
+	exit 1
+fi

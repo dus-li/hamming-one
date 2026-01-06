@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: NONE
+
+---
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments:
+  Enabled: true
+  AlignCompound: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Left
+AlignOperands: false
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: Automatic
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: MultiLine
+BinPackArguments: false
+BinPackParameters: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: WebKit
+BreakBeforeTernaryOperators: false
+BreakStringLiterals: false
+PenaltyBreakAssignment: 100
+PenaltyBreakBeforeFirstCallParameter: 100
+DerivePointerAlignment: false
+DisableFormat: false
+#ForEachMacros:
+IndentCaseLabels: false
+IndentPPDirectives: BeforeHash
+PPIndentWidth: 2
+Language: Cpp
+NamespaceIndentation: Inner
+PointerAlignment: Right
+ContinuationIndentWidth: 4
+IndentWidth: 8
+TabWidth: 8
+ColumnLimit: 80
+UseTab: AlignWithSpaces
+SpaceAfterCStyleCast: false
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<[^/]*>'
+    Priority: 1
+    SortPriority: 10
+  - Regex: '^<thrust/.*>'
+    Priority: 2
+    SortPriority: 20
+  - Regex: '^".*\.cuh'
+    Priority: 3
+    SortPriority: 30
+IncludeIsMainRegex: 'NOTHING_AKJSDHFKJAHD87F6A8S70DUHAKJSNBDVASDJHFAUISHF'
+SortIncludes: true
+KeepEmptyLinesAtTheStartOfBlocks: true
+#TypenameMacros:
+#NumericLiteralCase:
+#  ExponentLetter: Lower
+#  HexDigit: Upper
+#  Prefix: Lower
+#  Suffix: Upper
+WrapNamespaceBodyWithEmptyLines: Always
+IndentAccessModifiers: false
+AccessModifierOffset: -6
+EmptyLineBeforeAccessModifier: LogicalBlock
+#StatementMacros:
