@@ -2,17 +2,22 @@
 // SPDX-FileCopyrightText: Dus'li
 
 #include <exception>
+#include <fstream>
 #include <iostream>
 
 #include "sequences.cuh"
 
 using seq::Sequences;
 
-static __host__ std::istream &select_src(int argc, const char *argv[])
+static __host__ Sequences read_sequences(int argc, const char *argv[])
 {
 	try {
-		return argc == 1 ? std::cin : std::ifstream(argv[1]));
-	} catch {
+		if (argc == 1)
+			return Sequences::from_stream(std::cin);
+
+		std::ifstream file(argv[1]);
+		return Sequences::from_stream(file);
+	} catch (const std::exception &e) {
 		throw;
 	}
 }
@@ -20,14 +25,14 @@ static __host__ std::istream &select_src(int argc, const char *argv[])
 int main(int argc, const char *argv[])
 {
 	try {
-		Sequences seqs = Sequences::from_stream(select_src(argc, argc));
+		Sequences seqs = read_sequences(argc, argv);
 
-		thrust::host_vector<ipair> pairs = seqs.hamming_one();
-		std::for_each(pairs.begin(), pairs.end(), [](ipair &p) {
+		thrust::host_vector<seq::ipair> pairs = seqs.hamming_one();
+		std::for_each(pairs.begin(), pairs.end(), [](seq::ipair &p) {
 			std::cout << p[0] << " and " << p[1] << std::endl;
 		});
 	} catch (const std::exception &e) {
-		std::cerr << e.what();
+		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;

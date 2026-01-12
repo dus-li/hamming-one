@@ -1,0 +1,3 @@
+invalid input,
+i am only a haiku.
+syntax error now.

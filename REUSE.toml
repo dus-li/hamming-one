@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: None
+
+version = 1
+
+[[annotations]]
+path = ["examples/*.txt", "examples/*.gz"]
+SPDX-FileCopyrightText = "2026 Dus'li"
+SPDX-License-Identifier = "Apache-2.0"

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Dus'li
 
-TARGET := spheres
+TARGET := hamming-one
 
 CXX  := g++
 NVCC := nvcc
@@ -14,7 +14,7 @@ DIR_BUILD         := build
 
 CXXFLAGS  := -O2 -Wall -Wextra -std=c++20 -I$(DIR_INCLUDE)
 NVCCFLAGS := -O2 -I$(DIR_INCLUDE) --extended-lambda --expt-relaxed-constexpr
-NVCCFLAGS += --compiler-options '-fPIC -Wall -Wextra'
+NVCCFLAGS += --std c++20 --compiler-options '-fPIC -Wall -Wextra'
 LDFLAGS   :=
 
 V ?= 0

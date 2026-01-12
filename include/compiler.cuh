@@ -13,5 +13,3 @@
 
 #define same_type__(fst_, snd_) __builtin_types_compatible_p(fst_, snd_)
 #define same_type(fst_, snd_)   same_type__(typeof(fst_), typeof(snd_))
-
-#define fallthrough __attribute__((fallthrough))

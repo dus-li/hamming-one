@@ -8,10 +8,10 @@
 #include <cstdint>
 #include <istream>
 
-#include <thrust/device_vector>
-#include <thrust/host_vector>
+#include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
 
-namespace seq;
+namespace seq {
 
 // clang-format off
 /** X-macro with error codes of noexcept methods of @ref Sequences. */
@@ -38,7 +38,7 @@ extern const size_t DEFAULT_LEN;
  * a string view. The codes should be passed as-returned, with no negating the
  * values. This function handles that internally.
  */
-std::string_view errmsg(int err) noexcept;
+const char *errmsg(int err) noexcept;
 
 /**
  * A struct capturing a collection of sequences over binary alphabet.
@@ -60,7 +60,7 @@ std::string_view errmsg(int err) noexcept;
  */
 struct Sequences {
   private:
-	size_t       len;
+	size_t       len = DEFAULT_LEN;
 	device_slice data;
 
   public:
@@ -117,3 +117,5 @@ struct Sequences {
 	 */
 	__host__ thrust::host_vector<ipair> hamming_one(size_t bsize = 256);
 };
+
+} // namespace seq
